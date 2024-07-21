@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import {
   boolean,
   integer,
@@ -5,13 +6,9 @@ import {
   primaryKey,
   text,
   timestamp,
+  uuid,
 } from "drizzle-orm/pg-core";
 import { AdapterAccount } from "next-auth/adapters";
-
-export const testing = pgTable("testing", {
-  id: text("id").notNull().primaryKey(),
-  name: text("name"),
-});
 
 export const users = pgTable("user", {
   id: text("id")
@@ -89,3 +86,18 @@ export const authenticators = pgTable(
     }),
   })
 );
+
+export const room = pgTable("room", {
+  id: uuid("id")
+    .default(sql`gen_random_uuid()`)
+    .notNull()
+    .primaryKey(),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  name: text("name").notNull(),
+  language: text("language").notNull(),
+  githubRepo: text("githubRepo"),
+});
+
+export type Room = typeof room.$inferSelect;

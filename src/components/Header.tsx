@@ -14,7 +14,7 @@ async function Header() {
 
   return (
     <div className=" py-2 dark:bg-inherit">
-      <div className="border-b border-slate-200 dark:border-slate-600 container flex justify-between items-center">
+      <div className="border-b border-slate-200 dark:border-slate-600 flex justify-between items-center">
         <Link href={"/"} className="flex items-center gap-1 hover:underline">
           <Image src={Logo} alt="Brand Logo" width={60} height={60} />
           <span className="text-2xl font-bold ">devFinder</span>
