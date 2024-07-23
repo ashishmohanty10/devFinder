@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import Logo from "@/../public/icon.png";
+import Logo from "@/../public/Logo.png";
 import { SignIn } from "./sign-in";
 import { auth } from "@/auth";
 import { SignOut } from "./sign-out";
@@ -25,7 +25,7 @@ async function AccountDropDown() {
           <AvatarFallback>P</AvatarFallback>
         </Avatar>
 
-        <p className="text-sm">{session?.user?.name}</p>
+        <p className="text-sm font-medium">{session?.user?.name}</p>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem className="bg-none">
@@ -40,11 +40,11 @@ async function Header() {
   const session = await auth();
 
   return (
-    <header className="py-3  dark:bg-inherit shadow-sm shadow-slate-200 dark:shadow-sm dark:shadow-slate-400">
+    <header className="py-3 dark:bg-inherit bg-gray-200 border-b sticky top-0 z-50">
       <div className="px-4 flex justify-between items-center ">
-        <Link href={"/"} className="flex items-center gap-1 hover:underline">
-          <Image src={Logo} alt="Brand Logo" width={50} height={50} />
-          <span className="text-xl font-bold ">devFinder</span>
+        <Link href={"/"} className="flex items-center gap-3 hover:underline">
+          <Image src={Logo} alt="Brand Logo" width={30} height={30} />
+          <span className="text-xl font-bold">DevFinder</span>
         </Link>
 
         <div className="flex gap-4 items-center">
