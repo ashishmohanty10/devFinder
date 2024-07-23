@@ -1,5 +1,6 @@
 import { signOut } from "@/auth";
 import { Button } from "./ui/button";
+import { LogOut } from "lucide-react";
 
 export function SignOut() {
   return (
@@ -9,7 +10,10 @@ export function SignOut() {
         await signOut();
       }}
     >
-      <Button type="submit">Sign Out</Button>
+      <Button type="submit" className="flex items-center gap-1">
+        <LogOut />
+        Sign Out
+      </Button>
     </form>
   );
 }
