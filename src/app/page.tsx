@@ -30,7 +30,7 @@ function RoomCard({ room }: { room: Room }) {
           <Link
             href={room.githubRepo}
             target="_blank"
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 w-fit animate-pulse"
             rel="noopener noreferrer"
           >
             <GithubIcon />

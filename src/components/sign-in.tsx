@@ -1,6 +1,6 @@
 import { signIn } from "@/auth";
-import { Button } from "./ui/button";
 import { LogIn } from "lucide-react";
+import { Button } from "./ui/button";
 
 export function SignIn() {
   return (
