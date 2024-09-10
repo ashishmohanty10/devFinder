@@ -1,14 +1,20 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Poppins } from "next/font/google";
+import localFont from "next/font/local";
 import { ThemeProvider } from "@/components/theme-provider";
 import NextTopLoader from "nextjs-toploader";
 import { cn } from "@/lib/utils";
 import Header from "@/components/Header";
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "700"],
+const geistSans = localFont({
+  src: "./fonts/GeistVF.woff",
+  variable: "--font-geist-sans",
+  weight: "100 900",
+});
+const geistMono = localFont({
+  src: "./fonts/GeistMonoVF.woff",
+  variable: "--font-geist-mono",
+  weight: "100 900",
 });
 
 export const metadata: Metadata = {
@@ -24,10 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={cn(
-          `min-h-screen bg-background font-sans antialiased`,
-          poppins.className
-        )}
+        className={`min-h-screen bg-background font-sans antialiased ${geistSans.className} ${geistMono.className}`}
       >
         <ThemeProvider
           attribute="class"
