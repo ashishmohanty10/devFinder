@@ -1,11 +1,9 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-
 import { CirclePlus, GithubIcon } from "lucide-react";
-import { getRooms } from "@/data-access/room";
+import { getRooms, getUserRooms } from "@/data-access/room";
 import { auth } from "@/auth";
 import { SignIn } from "@/components/sign-in";
-import { SearchBar } from "./Search-bar";
 import RoomCard from "@/components/roomCard";
 
 export default async function Home({
@@ -15,7 +13,7 @@ export default async function Home({
     search: string;
   };
 }) {
-  const rooms = await getRooms(searchParams.search);
+  const rooms = await getUserRooms();
 
   const session = await auth();
 
@@ -38,8 +36,6 @@ export default async function Home({
           </Link>
         </Button>
       </div>
-
-      <SearchBar />
 
       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
         {rooms.map((room) => (

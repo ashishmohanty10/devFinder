@@ -13,6 +13,25 @@ export async function getRooms(search: string | undefined) {
   return rooms;
 }
 
+export async function getUserRooms() {
+  unstable_noStore;
+  const session = await auth();
+  const userId = session?.user?.id;
+
+  if (!userId) {
+    throw new Error("userId is not found");
+  }
+
+  if (!session) {
+    throw new Error("You must be logged in to create this room");
+  }
+
+  const rooms = await database.query.room.findMany({
+    where: eq(room.userId, userId),
+  });
+  return rooms;
+}
+
 export async function getRoom(roomId: string) {
   unstable_noStore;
 

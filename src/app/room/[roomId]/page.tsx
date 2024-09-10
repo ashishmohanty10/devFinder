@@ -1,5 +1,6 @@
-import { splitTags, TagsList } from "@/components/tags-list";
+import { TagsList } from "@/components/tags-list";
 import { getRoom } from "@/data-access/room";
+import { splitTags } from "@/lib/utils";
 import { GithubIcon } from "lucide-react";
 import Link from "next/link";
 

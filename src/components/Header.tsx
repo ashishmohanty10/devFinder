@@ -46,6 +46,10 @@ async function Header() {
           <span className="text-xl font-bold">DevFinder</span>
         </Link>
 
+        <nav>
+          <Link href={"/your-rooms"}>Your Room</Link>
+        </nav>
+
         <div className="flex gap-4 items-center">
           {session ? <AccountDropDown /> : <SignIn />}
           <ModeToggle />
