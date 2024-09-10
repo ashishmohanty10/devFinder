@@ -18,7 +18,6 @@ export async function getUserRooms() {
   if (!userId) {
     throw new Error("userId is not found");
   }
-
   if (!session) {
     throw new Error("You must be logged in to create this room");
   }
