@@ -1,8 +1,11 @@
+import { auth } from "@/auth";
 import { TagsList } from "@/components/tags-list";
 import { getRoom } from "@/data-access/room";
 import { splitTags } from "@/lib/utils";
 import { GithubIcon } from "lucide-react";
+import { unstable_noStore } from "next/cache";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 interface RoomPageProps {
   params: {
@@ -11,11 +14,19 @@ interface RoomPageProps {
 }
 
 export default async function RoomPage({ params }: RoomPageProps) {
+  unstable_noStore();
   const roomId = params.roomId;
   const room = await getRoom(roomId);
 
   if (!room) {
     return <div>No room of this ID found</div>;
+  }
+
+  const session = await auth();
+  const user = session?.user;
+
+  if (!user) {
+    redirect(`/api/auth/signin?callbackUrl=/${roomId}`);
   }
 
   return (

@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { CirclePlus, GithubIcon } from "lucide-react";
-import { getRooms, getUserRooms } from "@/data-access/room";
+import { getUserRooms } from "@/data-access/room";
 import { auth } from "@/auth";
 import { SignIn } from "@/components/sign-in";
-import RoomCard from "@/components/roomCard";
+import YourRoomCard from "./room-card";
+import { unstable_noStore } from "next/cache";
 
 export default async function Home({
   searchParams,
@@ -13,6 +14,7 @@ export default async function Home({
     search: string;
   };
 }) {
+  unstable_noStore();
   const rooms = await getUserRooms();
 
   const session = await auth();
@@ -32,14 +34,14 @@ export default async function Home({
         <Button asChild>
           <Link href={"/create-room"} className="flex items-center gap-2">
             <CirclePlus />
-            <>Create Room</>
+            Create Room
           </Link>
         </Button>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
         {rooms.map((room) => (
-          <RoomCard key={room.id} room={room} />
+          <YourRoomCard key={room.id} room={room} />
         ))}
       </div>
     </main>

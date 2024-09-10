@@ -37,6 +37,7 @@ async function AccountDropDown() {
 
 async function Header() {
   const session = await auth();
+  const isLoggedIn = session?.user;
 
   return (
     <header className="py-3 dark:bg-inherit border-b sticky top-0 z-50 backdrop-blur-xl">
@@ -46,9 +47,7 @@ async function Header() {
           <span className="text-xl font-bold">DevFinder</span>
         </Link>
 
-        <nav>
-          <Link href={"/your-rooms"}>Your Room</Link>
-        </nav>
+        <nav>{isLoggedIn && <Link href={"/your-rooms"}>Your Room</Link>}</nav>
 
         <div className="flex gap-4 items-center">
           {session ? <AccountDropDown /> : <SignIn />}

@@ -7,6 +7,7 @@ import { auth } from "@/auth";
 import { SignIn } from "@/components/sign-in";
 import { SearchBar } from "./Search-bar";
 import RoomCard from "@/components/roomCard";
+import { unstable_noStore } from "next/cache";
 
 export default async function Home({
   searchParams,
@@ -15,6 +16,7 @@ export default async function Home({
     search: string;
   };
 }) {
+  unstable_noStore();
   const rooms = await getRooms(searchParams.search);
 
   const session = await auth();
