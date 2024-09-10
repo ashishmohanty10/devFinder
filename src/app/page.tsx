@@ -15,15 +15,18 @@ import { getRooms } from "@/data-access/room";
 import { auth } from "@/auth";
 import { SignIn } from "@/components/sign-in";
 import { splitTags, TagsList } from "@/components/tags-list";
+import { SearchBar } from "./Search-bar";
 
 function RoomCard({ room }: { room: Room }) {
   return (
     <Card className="h-[350px] flex flex-col justify-evenly drop-shadow-md">
       <CardHeader>
-        <CardTitle>{room.name}</CardTitle>
-        <CardDescription className="h-10 text-ellipsis overflow-hidden">
-          {room.description}...
-        </CardDescription>
+        <div>
+          <CardTitle>{room.name}</CardTitle>
+          <CardDescription className="h-10 text-ellipsis overflow-hidden">
+            {room.description}...
+          </CardDescription>
+        </div>
       </CardHeader>
       <CardContent>
         {room.githubRepo && (
@@ -52,8 +55,14 @@ function RoomCard({ room }: { room: Room }) {
   );
 }
 
-export default async function Home() {
-  const rooms = await getRooms();
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: {
+    search: string;
+  };
+}) {
+  const rooms = await getRooms(searchParams.search);
 
   const session = await auth();
 
@@ -76,6 +85,9 @@ export default async function Home() {
           </Link>
         </Button>
       </div>
+
+      <SearchBar />
+
       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
         {rooms.map((room) => (
           <RoomCard key={room.id} room={room} />

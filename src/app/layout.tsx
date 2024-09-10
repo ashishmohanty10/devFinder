@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
+import { Poppins } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import Header from "@/components/Header";
 import NextTopLoader from "nextjs-toploader";
 import { cn } from "@/lib/utils";
+import Header from "@/components/Header";
 
-const fontSans = FontSans({
+const poppins = Poppins({
   subsets: ["latin"],
-  variable: "--font-sans",
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -25,8 +25,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
+          `min-h-screen bg-background font-sans antialiased`,
+          poppins.className
         )}
       >
         <ThemeProvider
@@ -36,6 +36,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <NextTopLoader />
+
           <Header />
 
           <main className="px-4">{children}</main>

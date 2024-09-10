@@ -4,6 +4,7 @@ import { Room, room } from "@/db/schema";
 import { database } from "@/db/database";
 import { auth } from "@/auth";
 import { revalidatePath } from "next/cache";
+import { eq } from "drizzle-orm";
 
 export async function createRoomAction(roomData: Omit<Room, "id" | "userId">) {
   const session = await auth();
